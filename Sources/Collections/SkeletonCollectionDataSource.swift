@@ -58,4 +58,15 @@ extension SkeletonCollectionDataSource: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        guard let originalCollectionViewDataSource = self.originalCollectionViewDataSource else {
+            fatalError()
+        }
+        let view = originalCollectionViewDataSource.collectionView!(collectionView,
+                                                                   viewForSupplementaryElementOfKind: kind,
+                                                                   at: indexPath)
+        return view
+    }
 }
